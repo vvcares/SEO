@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# This script will update your current WAN IP to the cloudflare as A-Record DNS
 # wget https://raw.githubusercontent.com/vvcares/others/master/vv_agarwal_cloudflare_ddns.sh -O /sbin/vv_agarwal_cloudflare_ddns.sh
 # chmod +x /sbin/vv_agarwal_cloudflare_ddns.sh
 # Then set Synology DSM task scheduler to run this every 15 minutes (set the Last Run Time as 23:45)
