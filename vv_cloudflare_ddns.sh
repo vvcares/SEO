@@ -1,24 +1,24 @@
-# wget https://vvcares.com/2//sbin/cloudflaredns.sh.sh -O /sbin//sbin/cloudflaredns.sh.sh
-# chmod +x /sbin//sbin/cloudflaredns.sh
-# vv_cloudflare_ddns.sh . EMAIL Global_API SUB_domain ROOT_DOMAIN ZONE_ID
 #!/usr/bin/env bash
 
-# Step 1: Fill in EMAIL, TOKEN, DOMAIN and SUBDOMAIN. Your API token is here: https://www.cloudflare.com/a/account/my-account
-#         Make sure the token is the Global token, or has these permissions: #zone:read, #dns_record:read, #dns_records:edit
-# Step 2: Create an A record on Cloudflare with the subdomain you chose
-# Step 3: Run "./ddns.sh -l" to get the zone_id and rec_id of the record you created.
-#         Fill in ZONE_ID and REC_ID below
-#         This step is optional, but will save you 2 requests every time you this script
-# Step 4: Run "./ddns.sh". It should tell you that record was updated or that it didn't need updating.
-# Step 5: Run it every hour with cron. Use the '-s' flag to silence normal output
-#         0 * * * * /path/to/ddns.sh -s
+# This script will lookup the ZONE_ID/REC_ID itself automatically. If you could provide, the process will be much faster.
+# STEP1: Create an A record on Cloudflare with the subdomain you chose. Your TOKEN/Global_API is here: https://www.cloudflare.com/a/account/my-account
+# STEP2: wget https://raw.githubusercontent.com/vvcares/others/master/vv_cloudflare_ddns.sh -O /sbin//sbin/vv_cloudflare_ddns.sh
+# STEP3: chmod +x /sbin/vv_cloudflare_ddns.sh
+# STEP4: RUN this file with task scheduler with parameters as below..
+# STEP5: bash vv_cloudflare_ddns.sh -s EMAIL GLOBAL_API SUB_DOMAIN ROOT_DOMAIN_FQDN CF_PROXY_TRUE_FALSE
+
+# IF JUST WANT TO GET Cloudflare RECORD_ID ?: bash vv_cloudflare_ddns.sh -l EMAIL Global_API SUB_domain ROOT_DOMAIN ZONE_ID
 
 EMAIL=$2
 TOKEN=$3
 SUBDOMAIN=$4
 DOMAIN=$5
-ZONE_ID=$6
-REC_ID='' #This script will find the Rec_ID automatically.
+PROXIED=$6
+# TTL=1
+
+# This script will find the ZONE_ID/REC_ID automatically.
+ZONE_ID=''
+REC_ID=''
 
 set -euo pipefail
 set -x # enable for debugging
@@ -31,7 +31,6 @@ CURL="curl -s \
   -H Content-Type:application/json \
   -H X-Auth-Key:$TOKEN \
   -H X-Auth-Email:$EMAIL "
-
 
 if [ -z "$ZONE_ID" ] || $LOOKUP; then
   ZONE_ID="$($CURL "$API_URL/zones?name=$DOMAIN" | sed -e 's/[{}]/\n/g' | grep '"name":"'"$DOMAIN"'"' | sed -e 's/,/\n/g' | grep '"id":"' | cut -d'"' -f4)"
@@ -55,6 +54,6 @@ fi
 
 $VERBOSE && echo "Setting IP to $IP"
 
-$CURL -X PUT "$API_URL/zones/$ZONE_ID/dns_records/$REC_ID" --data '{"type":"A","name":"'"$SUBDOMAIN"'","content":"'"$IP"'","proxied":true}' 1>/dev/null
+$CURL -X PUT "$API_URL/zones/$ZONE_ID/dns_records/$REC_ID" --data '{"type":"A","name":"'"$SUBDOMAIN"'","content":"'"$IP"'","proxied":'"$6"',"ttl":'"$7"'}' 1>/dev/null
 
 exit 0
