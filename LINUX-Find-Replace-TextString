@@ -1,0 +1,8 @@
+##Find the String first
+grep -r OldString /FullPath/
+
+##Replace the strings
+find /FullPath/ -type f -name "*.*" -print0 | xargs -0 sed -i'' -e 's/OldString/NewString/g'
+
+##Makesure the string is not anymore
+grep -r OldString /FullPath/
