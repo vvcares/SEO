@@ -1,8 +1,18 @@
-##Find the String first
+UBUNTU TIPS:
+
+##FIND THE STRING FIRST
 grep -r OldString /FullPath/
 
-##Replace the strings
+##REPLACE THE STRINGS
 find /FullPath/ -type f -name "*.*" -print0 | xargs -0 sed -i'' -e 's/OldString/NewString/g'
 
-##Makesure the string is not anymore
+##MAKESURE THE STRING IS NOT ANYMORE
 grep -r OldString /FullPath/
+
+____________________________________
+RAR/UNRAR COMMANDS:
+
+sudo apt-get install unrar rar
+unrar e file.rar
+rar x file.rar
+rar a -r folder.rar path/to/folder/
