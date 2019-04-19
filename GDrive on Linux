@@ -5,7 +5,7 @@ https://github.com/astrada/google-drive-ocamlfuse
 sudo add-apt-repository ppa:alessandro-strada/ppa
 sudo apt-get update
 sudo apt-get install google-drive-ocamlfuse
-google-drive-ocamlfuse -headless -label MyFolderName -id 1026579755882-ftce7bi3vmrm26rhcc5paatm8eapnd18.apps.googleusercontent.com -secret LrVUNPekOvCxTvwPQ-I-MVOZ
+google-drive-ocamlfuse -headless -label MyFolderName -id MyGdriveClientID -secret MyClientIdSecret
 
 Now we could see the label name 'MyFolderName' is created in the path '/root/.gdfuse/MyFolderName'
 Create your 'Gdrive' folder on any location (either root/xxx) or (/home/admin/web/MyDomain.com/public_html/gdrive)
