@@ -4,7 +4,10 @@ UBUNTU TIPS:
 grep -r OldString /FullPath/
 
 ##REPLACE THE STRINGS
+find /FullPath/ -type f -name "*" -print0 | xargs -0 sed -i'' -e 's/OldString/NewString/g'
+//OR//
 find /FullPath/ -type f -name "*.*" -print0 | xargs -0 sed -i'' -e 's/OldString/NewString/g'
+
 
 ##MAKESURE THE STRING IS NOT ANYMORE
 grep -r OldString /FullPath/
