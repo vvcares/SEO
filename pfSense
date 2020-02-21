@@ -1,3 +1,5 @@
 pfBlockerNG-devel - DNSBL> DNSBL groups > easylist > just add this link 'https://dbl.oisd.nl'
 This link has much much high list of websites of Ads, malwares, hackers etc.,
+Bad lists : 'https://dbl.oisd.nl'
+Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
 -------------------------------------------
