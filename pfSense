@@ -31,3 +31,15 @@ NAT Reflection: Disable
 
 Check DNSBL test : http://fourthgate.org
 -------------------------------------------
+PORT FORWARDING (Eg NAS:81)
+** Steps = Port forward on primary router + pfsense NAT-PortForward + pfsense Firewall rule allow
+ 
+Interface : WAN
+Protocol : TCP
+Destination : Any
+Destination Portrange : 81 (WAN port)
+Redirect TargetIP : NAS-IP
+Redir Target Port : 81 (Internal port)
+NAT Reflection : Disabled
+Filter rule association : Pass any to any *OR* let it create new rule itself on WAN interface
+-------------------------------------------
