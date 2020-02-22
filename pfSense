@@ -16,3 +16,18 @@ This link has much much high list of websites of Ads, malwares, hackers etc.,
 Bad lists : 'https://dbl.oisd.nl'
 Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
 -------------------------------------------
+
+Restrict users to use only pfSense as DNS (redirecting google DNS to pfsense)
+
+Goto >>> Firewall > NAT > Port Forward
+Interface: LAN
+Protocol: TCP/UDP
+Destination: Invert Match checked, LAN Address
+Destination Port Range: 53 (DNS)
+Redirect Target IP: 127.0.0.1
+Redirect Target Port: 53 (DNS)
+Description: Redirect DNS
+NAT Reflection: Disable
+
+Check DNSBL test : http://fourthgate.org
+-------------------------------------------
