@@ -7,13 +7,17 @@ Web GUI can be access via pf BOX WAN/LAN ip
 
 
 pfBlockerNG-devel
-- DNS Resolver Enabled
-- DNS Forwarder Disabled
-- Every DNSBL changes must need to update settings
+- Enable Keep settings
+- Enable DNS Resolver
+- Enable pfBlocker >DNSBL >TLD
+- Disable DNSBL category (vv suggestions)
+- Disable DNS Forwarder (Otherwise DNSBL wont work properly)
+- CRON -set to once a day (not every hour)
+- Every DNSBL changes must need to update settings manually OR wait for normal cron job
 
-DNSBL> DNSBL groups > easylist > just add this link 'https://dbl.oisd.nl'
+DNSBL> DNSBL groups > easylist > just add this link 'https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts'
+- set cron to be once a day
 This link has much much high list of websites of Ads, malwares, hackers etc.,
-Bad lists : 'https://dbl.oisd.nl'
 Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
 -------------------------------------------
 
