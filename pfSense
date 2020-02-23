@@ -4,6 +4,7 @@ pf LAN set IP static is better. IP range must be diff from router's gateway rang
 pf DNS must be router's gateway (127.0.0.1 & 192.168.1.1)
 All client PCs must point to pf box LAN-IP as DNS (192.168.2.1)
 Web GUI can be access via pf BOX WAN/LAN ip
+- Services - backup - Enable
 
 
 pfBlockerNG-devel
