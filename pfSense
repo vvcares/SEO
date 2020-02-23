@@ -17,10 +17,18 @@ pfBlockerNG-devel
 - CRON -set to once a day (not every hour)
 - Every DNSBL changes must need to update settings manually OR wait for normal cron job
 
-DNSBL> DNSBL groups > easylist > just add this link 'https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling-porn-social/hosts'
-- set cron to be once a day
-This link has much much high list of websites of Ads, malwares, hackers etc.,
-Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
+DNSBL> DNSBL groups > easylist > change Feed urls..
+1. https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
+2. https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts
+- Any changes onto feed lists, need to DNSBL > UPDATE > RELOAD manually.
+- Action Unbound
+- Update Frequency - Once a day
+- Enabled Logging
+- Any websites blocked > goto pfBlockerNG > Reports
+Some Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
+
+DNSBL > DNSBL Category > Disabled (better not to use lot of feed lists, which will make more read/write on SSD)
+
 -------------------------------------------
 
 Restrict users to use only pfSense as DNS (redirecting google DNS to pfsense)
