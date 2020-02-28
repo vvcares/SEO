@@ -1,12 +1,12 @@
-pfSense:
-pf box WAN-IP must be same range as router's IP range (192.168.1.1)
-pf LAN set IP static is better. IP range must be diff from router's gateway range (192.168.2.1)
+pfSense (v2.4.4p3)
+WAN get from DHCP from Modem or Router.
+LAN IP must be static (pfBox's main ip).
+LAN interface set as DHCP for clients.
 pf DNS must be router's gateway (127.0.0.1 & 192.168.1.1)
 All client PCs must point to pf box LAN-IP as DNS (192.168.2.1)
 Web GUI can be access via pf BOX WAN/LAN ip
 - Services - backup - Enable
-- Status > System LogS > Settings > Log packets matched from the default block rules in the ruleset
-
+- Status > monitoring > settings > disable RRD graph
 
 pfBlockerNG-devel
 - Enable Keep settings
@@ -16,21 +16,19 @@ pfBlockerNG-devel
 - Disable DNS Forwarder (Otherwise DNSBL wont work properly)
 - CRON -set to once a day (not every hour)
 - Every DNSBL changes must need to update settings manually OR wait for normal cron job
+- For immediate whitelisting - goto DNSBL > Reports > click the + icon
 
 DNSBL> DNSBL groups > easylist > change Feed urls..
-1. https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn-social/hosts
-2. https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts
+1. ON - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/gambling-porn/hosts
+2. OFF - https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/social/hosts
 - Any changes onto feed lists, need to DNSBL > UPDATE > RELOAD manually.
 - Action Unbound
 - Update Frequency - Once a day
 - Enabled Logging
-- Any websites blocked > goto pfBlockerNG > Reports
-Some Ref : https://forums.serverbuilds.net/t/guide-pfblockerng-setup-pfsense-adblocking/1135
 
 DNSBL > DNSBL Category > Disabled (better not to use lot of feed lists, which will make more read/write on SSD)
 
--------------------------------------------
-
+------------------------------------------
 Restrict users to use only pfSense as DNS (redirecting google DNS to pfsense)
 
 Goto >>> Firewall > NAT > Port Forward
@@ -43,10 +41,10 @@ Redirect Target Port: 53 (DNS)
 Description: Redirect DNS
 NAT Reflection: Disable
 
-Check DNSBL test : http://fourthgate.org
+Check DNSBL test : any porn sites
 -------------------------------------------
 PORT FORWARDING (Eg NAS:81)
-** Steps = Port forward on primary router + pfsense NAT-PortForward + pfsense Firewall rule allow
+** Steps = Port forward on primary router + pfsense NATPortForward + pfsense Firewall rule allow
  
 Interface : WAN
 Protocol : TCP
