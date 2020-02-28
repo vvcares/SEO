@@ -7,6 +7,8 @@ All client PCs must point to pf box LAN-IP as DNS (192.168.2.1)
 Web GUI can be access via pf BOX WAN/LAN ip
 - Services - backup - Enable
 - Status > monitoring > settings > disable RRD graph
+- DHCP server > default lease time set to 604800 (7 days) & MAX is 691200 (8 days)
+- 
 
 pfBlockerNG-devel
 - Enable Keep settings
