@@ -1,0 +1,61 @@
+OpenVPN on pfSense 2.4.4p3
+
+- Goto VPN /OpenVPN/Servers/Add
+- Server mode : Remote Access (SSL/TLS + UserAuth)
+- Backend Auth : Local DB
+- Protocol : UDP on IPv4 only.
+- Device mode : tun-Layer3 TunnelMode
+- Interface : WAN
+- Localport 1194 (better to change diff port & port forward on ISP router to pfb)
+- Description : VPN access
+- TLS Config : Enable Use TLS key
+- TLS key usage mode : TLS auth
+- Peer cert authority : better to choose main pfb cert
+- Server cert : The cert must be SERVER-YES
+- DH parameter length : 2048 is enough
+- ECDH : default
+- Encryption : AES128-CBC-(128 bit)
+- Enable NCP : Yes
+- NCP Algorithm : AES-128-GCM
+- Auth digest algorithm : SHA256 enough
+- Hardware Crypto : choose if any, or leave it NO
+- Cert depth : One (Client+Server) enought
+- Strict user CN match : Yes (This will check the client's cert key vs username. Must have individual cert key for each users.
+- IPv4 Tunnel : 10.0.8.0/24
+- IPv6 tunnel : blank
+- Redirect IPv4 Gateway : YES
+- Compression : LZ4-v2
+- Push compression : YES
+- Inter-client comms : YES
+- Duplicate Connection : No
+- Dynamic IP : YES
+- Topology : Subnet
+- DNS Default Domain : No bother
+- DNS Server enable : YES (and provide VPN's 1st ip Eg: 10.0.8.1. So this will use as DNS on client side)
+- Dont use the generic IPs (192.168.xxx), this will conflict if the client's home ISP routers with same range.
+- Block Outside DNS : YES
+- Force DNS cache update : YES
+- NTP Server enable : No bother
+- NetBIOS enable : No bother
+- Custom options : No bother
+- UDP Fast I/O : YES is better
+- Send/Receive Buffer : Default
+- Gateway creation : IPv4 enough
+- Verbosity level : 3 (recommended)
+
+VPN > IPsec > Advanced Settings, enable MSS Clamping
+
+----------------------------------------------------------
+
+- Firewall/NAT/Outbound : Just leave it as Automatic
+- Firewall/Rules/OpenVPN : Pass/ Interface OpenVPN / IPv4/ Any / Any-to-Any / LogPackets
+- Firewall/Rules/WAN : Pass/ Interface WAN / IPv4 / UDP /
+---- Source : any
+---- Destination : WAN
+---- Destination port : OpenVPN(1194) Or that custom port of what you configured for OpenVPN
+---- Log Packets : YES
+
+** CMD > nslookup (Should show your pfb domain name and main IP)
+** Make sure can ping to local clients (Printers, file server etc)
+** Hostname pings must be FQDN (Eg: 'STAFFPC.localdomain' not only 'STAFFPC')
+-------------------------------------------------------------
