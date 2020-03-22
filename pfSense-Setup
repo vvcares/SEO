@@ -1,4 +1,5 @@
 pfSense (v2.4.4p3)
+--------------------
 WAN get from DHCP from Modem or Router.
 LAN IP must be static (pfBox's main ip).
 LAN interface set as DHCP for clients.
@@ -32,7 +33,7 @@ DNSBL> DNSBL groups > easylist > change Feed urls..
 DNSBL > DNSBL Category > Disabled (better not to use lot of feed lists, which will make more read/write on SSD)
 
 ------------------------------------------
-Restrict users to use only pfSense as DNS (redirecting google DNS to pfsense)
+Restrict users to use only pfSense IP as DNS (Restrict user PCs using google DNSs)
 
 Goto >>> Firewall > NAT > Port Forward
 Interface: LAN
@@ -58,3 +59,14 @@ Redir Target Port : 81 (Internal port)
 NAT Reflection : Disabled
 Filter rule association : Pass any to any *OR* let it create new rule itself on WAN interface
 -------------------------------------------
+Goto > System/Advanced = set HTTPS & port (Eg:2083)
+Choose ssl cert = Eg cloudflare's cert
+Goto > Firewall/NAT = Add port
+-- Interface : WAN
+-- Protocol : TCP
+-- Destination : WAN
+-- Port range : 2083
+-- Redirect target ip : pfb's ip (Eg: 192.168.0.100)
+-- Port range : 2083
+-- Filter rule association : Add Associated filter rule
+---------------------------------------------
