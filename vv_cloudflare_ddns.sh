@@ -2,8 +2,8 @@
 
 # This script will lookup the ZONE_ID/REC_ID itself automatically. If you could provide, the process will be much faster.
 # STEP1: Create an A record on Cloudflare with the subdomain you chose. Your TOKEN/Global_API is here: https://www.cloudflare.com/a/account/my-account
-# STEP2: wget https://raw.githubusercontent.com/vvcares/others/master/vv_cloudflare_ddns.sh -O /sbin//sbin/vv_cloudflare_ddns.sh
-# STEP3: chmod +x /sbin/vv_cloudflare_ddns.sh
+# STEP2: wget https://raw.githubusercontent.com/vvcares/others/master/vv_cloudflare_ddns.sh -O /vv_files/vv_cloudflare_ddns.sh
+# STEP3: chmod +x /vv_files/vv_cloudflare_ddns.sh
 # STEP4: RUN this file with task scheduler with parameters as below..
 # STEP5: bash vv_cloudflare_ddns.sh -s EMAIL GLOBAL_API SUB_DOMAIN ROOT_DOMAIN_FQDN CF_PROXY_TRUE_FALSE
 
