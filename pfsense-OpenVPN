@@ -30,8 +30,9 @@ OpenVPN on pfSense 2.4.4p3
 - Duplicate Connection : No
 - Dynamic IP : YES
 - Topology : Subnet
-- DNS Default Domain : No bother
-- DNS Server enable : YES (and provide VPN's 1st ip Eg: 10.0.8.1. So this will use as DNS on client side)
+- DNS Default Domain : Yes
+  - domain name to resolve via VPN (normally is 'LOCALDOMAIN' )
+- DNS Server enabled : YES (and provide VPN's 1st ip Eg: 10.0.8.1. So this will use as DNS on client side)
 - Dont use the generic IPs (192.168.xxx), this will conflict if the client's home ISP routers with same range.
 - Block Outside DNS : YES
 - Force DNS cache update : YES
@@ -42,9 +43,7 @@ OpenVPN on pfSense 2.4.4p3
 - Send/Receive Buffer : Default
 - Gateway creation : IPv4 enough
 - Verbosity level : 3 (recommended)
-
 VPN > IPsec > Advanced Settings, enable MSS Clamping
-
 ----------------------------------------------------------
 
 - Firewall/NAT/Outbound : Just leave it as Automatic
@@ -54,8 +53,24 @@ VPN > IPsec > Advanced Settings, enable MSS Clamping
 ---- Destination : WAN
 ---- Destination port : OpenVPN(1194) Or that custom port of what you configured for OpenVPN
 ---- Log Packets : YES
+----------------------------------------------------------
+
+Install OpenVPN Client Export module.
+- Host Name Resolution : Other (We going to use DDNS)
+- Host Name : your DDNS FQDN name
+- Verify Server CN : Automatic
+- Block Outside DNS : Yes
+- Legacy Client : Enable (do not include...)
+- Use Random Local Port : Yes
+- PKCS#11 Certificate : No
+- Microsoft Certificate : No
+- Password Protect cert : Yes (2FA while vpn connections)
+- Use A Proxy : no
+- Additional configuration : Blank
 
 ** CMD > nslookup (Should show your pfb domain name and main IP)
 ** Make sure can ping to local clients (Printers, file server etc)
 ** Hostname pings must be FQDN (Eg: 'STAFFPC.localdomain' not only 'STAFFPC')
 -------------------------------------------------------------
+
+
