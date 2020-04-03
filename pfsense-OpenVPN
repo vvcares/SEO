@@ -40,6 +40,7 @@ OpenVPN on pfSense 2.4.4p3
 - NetBIOS enable : No bother
 - Custom options : No bother
 - UDP Fast I/O : YES is better
+- Exit Notify (Reconnect to This server / Retry)
 - Send/Receive Buffer : Default
 - Gateway creation : IPv4 enough
 - Verbosity level : 3 (recommended)
@@ -72,5 +73,3 @@ Install OpenVPN Client Export module.
 ** Make sure can ping to local clients (Printers, file server etc)
 ** Hostname pings must be FQDN (Eg: 'STAFFPC.localdomain' not only 'STAFFPC')
 -------------------------------------------------------------
-
-
