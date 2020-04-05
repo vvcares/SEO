@@ -7,6 +7,7 @@
 # STEP4: RUN this file with task scheduler with parameters as below..
 # STEP5: bash vv_cloudflare_ddns.sh -s EMAIL GLOBAL_API SUB_DOMAIN ROOT_DOMAIN_FQDN CF_PROXY_TRUE_FALSE
 
+# example : bash /vv_files/vv_cloudflare_ddns.sh -s EMAILID GLOBAL_API SUB_DOMAIN MAIN_DOMAIN PROXY_true_false
 # IF JUST WANT TO GET Cloudflare RECORD_ID ?: bash vv_cloudflare_ddns.sh -l EMAIL Global_API SUB_domain ROOT_DOMAIN ZONE_ID
 
 EMAIL=$2
@@ -14,14 +15,13 @@ TOKEN=$3
 SUBDOMAIN=$4
 DOMAIN=$5
 PROXIED=$6
-ZONE_ID=$7
-REC_ID=$8
-
+ZONE_ID='' #This script will get it automatically
+REC_ID='' #This script will get it automatically
 set -euo pipefail
 set -x # enable for debugging
 
-VERBOSE="[ '${1:-}' != '-s' ]"
-LOOKUP="[ '${1:-}' == '-l' ]"
+VERBOSE=" [ '${1:-}' != '-s' ] "
+LOOKUP=" [ '${1:-}' == '-l' ] "
 
 API_URL="https://api.cloudflare.com/client/v4"
 CURL="curl -s \
@@ -44,13 +44,13 @@ $LOOKUP && exit 0
 IP="$(curl -s http://ipv4.icanhazip.com)"
 RECORD_IP="$($CURL "$API_URL/zones/$ZONE_ID/dns_records/$REC_ID" | sed -e 's/[{}]/\n/g' | sed -e 's/,/\n/g' | grep '"content":"' | cut -d'"' -f4)"
 
-if [ "$IP" == "$RECORD_IP" ]; then
+if [ "$IP" = "$RECORD_IP" ]; then
   $VERBOSE && echo "IP Unchanged"
   exit 0
 fi
 
 $VERBOSE && echo "Setting IP to $IP"
 
-$CURL -X PUT "$API_URL/zones/$ZONE_ID/dns_records/$REC_ID" --data '{"type":"A","name":"'"$SUBDOMAIN"'","content":"'"$IP"'","proxied":'"$6"',"ttl":'"$7"'}' 1>/dev/null
+$CURL -X PUT "$API_URL/zones/$ZONE_ID/dns_records/$REC_ID" --data '{"type":"A","name":"'"$SUBDOMAIN"'","content":"'"$IP"'","proxied":'$PROXIED'}' 1>/dev/null
 
 exit 0
