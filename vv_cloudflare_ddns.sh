@@ -15,10 +15,7 @@ SUBDOMAIN=$4
 DOMAIN=$5
 PROXIED=$6
 ZONE_ID=$7
-# TTL=1
-
-# This script will find the ZONE_ID/REC_ID automatically.
-REC_ID=''
+REC_ID=$8
 
 set -euo pipefail
 set -x # enable for debugging
