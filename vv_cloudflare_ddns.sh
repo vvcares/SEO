@@ -2,13 +2,13 @@
 
 # This script will lookup the ZONE_ID/REC_ID itself automatically. If you could provide, the process will be much faster.
 # STEP1: Create an A record on Cloudflare with the subdomain you chose. Your TOKEN/Global_API is here: https://www.cloudflare.com/a/account/my-account
-# STEP2: wget https://raw.githubusercontent.com/vvcares/others/master/vv_cloudflare_ddns.sh -O /vv_files/vv_cloudflare_ddns.sh
-# STEP3: chmod +x /vv_files/vv_cloudflare_ddns.sh
+# STEP2: wget https://raw.githubusercontent.com/vvcares/others/master/vv_cfddns.sh -O /vv_files/vv_cfddns.sh
+# STEP3: chmod +x /vv_files/vv_cfddns.sh
 # STEP4: RUN this file with task scheduler with parameters as below..
-# STEP5: bash vv_cloudflare_ddns.sh -s EMAIL GLOBAL_API SUB_DOMAIN ROOT_DOMAIN_FQDN CF_PROXY_true_false
+# STEP5: bash vv_cfddns.sh -s EMAIL GLOBAL_API SUB_DOMAIN ROOT_DOMAIN_FQDN CF_PROXY_TRUE_FALSE
 
-# example : bash /vv_files/vv_cloudflare_ddns.sh -s EMAILID GLOBAL_API SUB_DOMAIN MAIN_DOMAIN PROXY_true_false
-# IF JUST WANT TO GET Cloudflare RECORD_ID ?: bash vv_cloudflare_ddns.sh -l EMAIL Global_API SUB_domain ROOT_DOMAIN ZONE_ID
+# example : bash /vv_files/vv_cfddns.sh -s EMAILID GLOBAL_API SUB_DOMAIN MAIN_DOMAIN PROXY_true_false
+# IF JUST WANT TO GET Cloudflare RECORD_ID ?: bash vv_cfddns.sh -l EMAIL Global_API SUB_domain ROOT_DOMAIN ZONE_ID
 
 EMAIL=$2
 TOKEN=$3
