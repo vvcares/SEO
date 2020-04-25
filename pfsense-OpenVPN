@@ -72,4 +72,5 @@ Install OpenVPN Client Export module.
 ** CMD > nslookup (Should show your pfb domain name and main IP)
 ** Make sure can ping to local clients (Printers, file server etc)
 ** Hostname pings must be FQDN (Eg: 'STAFFPC.localdomain' not only 'STAFFPC')
+** You may able to ping to 'USERNAME.localdomain'
 -------------------------------------------------------------
