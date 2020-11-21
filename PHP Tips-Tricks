@@ -6,3 +6,10 @@ jQuery(document).ready(function($) { if (window.history && window.history.pushSt
 WhatsApp click-to-call link :
 <a class="fa fa-whatsapp" style="font-size:48px;color:green;padding-left:10px" onclick="window.location.href='https://wa.me/+91-12345678'"></a>
 -----------------------------
+
+Java script website redirect in 120 seconds:
+    <script>
+        var timer = setTimeout(function() {
+            window.location='http://website.com'
+        }, 120000);
+    </script>
