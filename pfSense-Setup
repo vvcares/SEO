@@ -3,7 +3,8 @@ pfSense (v2.4.4p3)
 WAN get from DHCP from Modem or Router.
 LAN IP must be static (pfBox's main ip).
 LAN interface set as DHCP for clients.
-pf DNS must be router's gateway (127.0.0.1 & 192.168.1.1)
+System> General setup> DNS server settings > leave it blank.
+### (have to try) pf DNS must be router's gateway (127.0.0.1 & 192.168.1.1)
 All client PCs must point to pf box LAN-IP as DNS (192.168.2.1)
 Web GUI can be access via pf BOX WAN/LAN ip
 - Services - backup - Enable
