@@ -43,7 +43,7 @@ if (!preg_match("/^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]
 if (!preg_match("/^[\+0-9\-\(\)\s]*$/",$phone))
 {$errors .= "\n Error: Invalid Phone Number";}
 
-if (preg_match("/^abc|jpg|png|dating|funding|exchange|inbound|http|www|viagra|porn|sexy|honey|traffic|game|и|д|й|л|à/i", $message)){$errors .= "\n Error: Spammy message";}
+if (preg_match("/^loan|jpg|png|dating|funding|exchange|inbound|http|www|viagra|porn|sexy|honey|traffic|game|и|д|й|л|à/i", $message)){$errors .= "\n Error: Spammy message";}
 
 if( empty($errors))
 
