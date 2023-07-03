@@ -1,0 +1,5 @@
+//GET url query string. If the value r == R then redirect to other page
+<?php if ($_SERVER['QUERY_STRING'] !== '') {if ($_GET[r]=='R') {echo '<meta http-equiv="refresh" content="20;url=../blog">';}} ?>
+
+//IF the visit came from GOOGLE, then redirect to other page after 5 secs
+<?php if(strstr($_SERVER['HTTP_REFERER'], 'google')){ echo '<script>setTimeout(function() {window.location.href = "../contact.php";}, 5000)</script>';} //else {echo ' xxNo ';} ?>
