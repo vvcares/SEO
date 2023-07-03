@@ -1,0 +1,53 @@
+//GET url query string. If the value r == R then redirect to other page
+<?php if ($_SERVER['QUERY_STRING'] !== '') {if ($_GET[r]=='R') {echo '<meta http-equiv="refresh" content="20;url=../blog">';}} ?>
+
+//IF the visit came from GOOGLE, then redirect to other page after 5 secs
+<?php if(strstr($_SERVER['HTTP_REFERER'], 'google')){ echo '<script>setTimeout(function() {window.location.href = "../contact.php";}, 5000)</script>';} //else {echo ' xxNo ';} ?>
+
+---------------------------------------------------------------------------------------------------
+<?php
+echo $T=time()%30;
+// THIS SCRIPT WILL DO ROTATE THE RANDOM REDIRECTS TO OTHER WEBPAGE OF $U1,$U2...$U40
+//ini_set('display_errors', 1);
+//ini_set('display_startup_errors', 1);
+//error_reporting(E_ALL);
+
+$UX = "https://twitter.com/xxxx";
+
+$U0 = "https://aaabbccc.com";
+$U1 = "https://aaabbccc.com";
+$U2 = "https://aaabbccc.com";
+$U3 = "https://aaabbccc.com";
+$U40 = "https://aaabbccc.com";
+
+/* Choose the URLs according to Current MicroSeconds 40th digits -This to make random timing triggering */
+$T=microtime(true)*1000000%40; if (!isset(${'U'.$T})) {$A = $UX;} else $A = ${'U'.$T};
+
+
+$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+date_default_timezone_set("Asia/Singapore");
+
+if( empty($errors)){
+   $handle = fopen('1/rotate/RotateLog.php', 'a') or die("can't open file");
+   $time = date("Ymd H:i:s");
+   fwrite($handle, "\n");
+   fwrite($handle, $time);
+   fwrite($handle, ",");
+   fwrite($handle, $ip);
+   fwrite($handle, ",");
+   fwrite($handle, $A);
+   fclose($handle);
+}
+
+?>
+
+<script>
+/*similar behavior as an HTTP redirect*/
+//window.location.replace("<?php echo $A.'?r=R' ?>");
+
+/*similar behavior as clicking on a link*/
+//window.location.href = "<?php echo $A.'?r=R' ?>";
+var link = document.createElement("a");link.referrerPolicy = "no-referrer";link.rel = "noreferrer";link.href = "<?php echo $A.'?r=R' ?>";link.click();
+</script>
+
+-----------------------------------------------------------------------------------------
